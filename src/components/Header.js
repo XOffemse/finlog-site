@@ -96,14 +96,16 @@ useEffect(() => {
       >
         {/* Sidebar header with logo and close button */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-<a
-  href="#top"
+<button
   className="text-2xl font-medium"
   style={{ fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em' }}
-  onClick={() => setSidebarOpen(false)}
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSidebarOpen(false);
+  }}
 >
-  FinLog
-</a>
+FinLog
+</button>
 
           <button
             onClick={() => setSidebarOpen(false)}
