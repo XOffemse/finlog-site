@@ -83,18 +83,16 @@ export default function Header() {
     <>
       {/* Sidebar overlay */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
-          sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setSidebarOpen(false)}
         aria-hidden={!sidebarOpen}
       />
 
       {/* Sidebar drawer */}
       <aside
-        className={`fixed top-0 left-0 h-full w-52 bg-white z-50 transform transition-transform duration-300 ease-in-out ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 h-full w-52 bg-white z-50 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
         aria-hidden={!sidebarOpen}
         role="menu"
       >
@@ -182,17 +180,22 @@ export default function Header() {
 
           {/* Logo */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:transform-none md:ml-0">
-            <a
-              href="#"
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-2xl font-medium leading-none flex items-center"
               style={{
                 fontFamily: "'Orbitron', sans-serif",
                 letterSpacing: '0.05em',
                 color: 'white',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
               }}
             >
               FinLog
-            </a>
+            </button>
+
           </div>
 
           {/* Navigation links (desktop) */}
@@ -274,9 +277,8 @@ export default function Header() {
 
         {/* Underline effect */}
         <span
-          className={`hidden md:block absolute bottom-0 h-[2px] bg-white transition-opacity duration-150 ease-out pointer-events-none ${
-            indicatorStyle.visible ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`hidden md:block absolute bottom-0 h-[2px] bg-white transition-opacity duration-150 ease-out pointer-events-none ${indicatorStyle.visible ? 'opacity-100' : 'opacity-0'
+            }`}
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,
