@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen overflow-hidden pt-16 -mt-8"
+      className="relative w-full min-h-screen overflow-hidden pt-20 -mt-6"
     >
       {/* Background image */}
       <img

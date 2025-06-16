@@ -1,9 +1,8 @@
 export default function HeaderSidebar({ sidebarOpen, setSidebarOpen, links, headBG }) {
   return (
     <aside
-      className={`fixed top-0 left-0 h-full w-52 z-50 transform transition-transform duration-300 ease-in-out ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      }`}
+      className={`fixed top-0 left-0 h-full w-52 z-50 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
       aria-hidden={!sidebarOpen}
       role="menu"
       style={{
@@ -45,10 +44,19 @@ export default function HeaderSidebar({ sidebarOpen, setSidebarOpen, links, head
           <button
             onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
-            className="text-white text-3xl font-extrabold leading-none -top-0.5 relative"
+            className="text-white text-3xl font-extrabold leading-none"
+            style={{
+              marginTop: '-2px',     // Slight downward nudge
+              lineHeight: '1',        // Prevent vertical stretching
+              height: '32px',         // Set a fixed height for predictability
+              display: 'flex',
+              alignItems: 'center',   // Center icon vertically
+              justifyContent: 'center',
+            }}
           >
             &times;
           </button>
+
         </div>
 
         {/* Sidebar navigation links */}
