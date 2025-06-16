@@ -1,10 +1,13 @@
 import './App.css';
-import Header from './components/Header';
-import About from './components/About';
+import Header from './components/layouts/header/Header';  // Only this is needed
+import About from './pages/about/About';
 
 function Section({ id, title }) {
   return (
-    <section id={id} className="min-h-[100vh] flex items-center justify-center bg-white border-b border-gray-200">
+    <section
+      id={id}
+      className="min-h-[100vh] flex items-center justify-center bg-white border-b border-gray-200"
+    >
       <h2 className="text-4xl font-bold text-gray-800">{title}</h2>
     </section>
   );
@@ -17,6 +20,7 @@ function App() {
       <About />
       <Section id="features" title="Features" />
       <Section id="faq" title="FAQ" />
+      <Section id="downloads" title="Downloads" />
       <Section id="blog" title="Blog" />
       <Section id="contact" title="Contact" />
     </div>
