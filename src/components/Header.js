@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import aboutBG from './images/about-bg.jpg'; // Correct image import
+import aboutBG from './images/about-bg.jpg';
 
 export default function Header() {
   const [indicatorStyle, setIndicatorStyle] = useState({
@@ -13,7 +13,7 @@ export default function Header() {
   const activeLinkIndex = useRef(null);
 
   const links = [
-    { name: 'About', href: '#About' },
+    { name: 'About', href: '#about' },
     { name: 'Features', href: '#features' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Blog', href: '#blog' },
@@ -70,29 +70,45 @@ export default function Header() {
     });
   };
 
-  // Hide underline on mouse leave with fade out delay for smoothness
+  // Hide underline on mouse leave with fade out delay
   const handleContainerMouseLeave = () => {
     if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
     fadeTimeout.current = setTimeout(() => {
       setIndicatorStyle((prev) => ({ ...prev, visible: false }));
       activeLinkIndex.current = null;
-    }, 150); // match CSS transition duration
+    }, 150);
+  };
+
+  // Smooth scroll handler for links
+  const handleSmoothScroll = (event, href) => {
+    event.preventDefault();
+    // Close sidebar if open (for mobile)
+    if (sidebarOpen) setSidebarOpen(false);
+
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <>
       {/* Sidebar overlay */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
+          sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={() => setSidebarOpen(false)}
         aria-hidden={!sidebarOpen}
       />
 
       {/* Sidebar drawer */}
       <aside
-        className={`fixed top-0 left-0 h-full w-52 bg-white z-50 transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+        id="sidebar"
+        className={`fixed top-0 left-0 h-full w-52 bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
         aria-hidden={!sidebarOpen}
         role="menu"
       >
@@ -126,7 +142,7 @@ export default function Header() {
               key={link.name}
               href={link.href}
               className="text-lg font-medium hover:opacity-80 transition-opacity"
-              onClick={() => setSidebarOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               role="menuitem"
             >
               {link.name}
@@ -138,7 +154,7 @@ export default function Header() {
       {/* Header */}
       <header
         ref={headerRef}
-        className="relative flex items-center min-h-[64px] px-4 md:px-12 border-b border-transparent"
+        className="sticky top-0 z-50 flex items-center min-h-[64px] px-4 md:px-12 border-b border-transparent"
         style={{
           backgroundImage: `url(${aboutBG})`,
           backgroundSize: 'cover',
@@ -192,10 +208,10 @@ export default function Header() {
                 cursor: 'pointer',
                 padding: 0,
               }}
+              aria-label="Scroll to top"
             >
               FinLog
             </button>
-
           </div>
 
           {/* Navigation links (desktop) */}
@@ -221,6 +237,7 @@ export default function Header() {
                   href={link.href}
                   className="block hover:opacity-80 transition-opacity"
                   style={{ color: 'white' }}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
                 >
                   {link.name}
                 </a>
@@ -277,8 +294,9 @@ export default function Header() {
 
         {/* Underline effect */}
         <span
-          className={`hidden md:block absolute bottom-0 h-[2px] bg-white transition-opacity duration-150 ease-out pointer-events-none ${indicatorStyle.visible ? 'opacity-100' : 'opacity-0'
-            }`}
+          className={`hidden md:block absolute bottom-0 h-[2px] bg-white transition-opacity duration-150 ease-out pointer-events-none ${
+            indicatorStyle.visible ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,

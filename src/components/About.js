@@ -3,7 +3,7 @@ import bgImage from './images/about-bg.jpg'; // Ensure correct path
 
 export default function About() {
   return (
-    <section className="relative w-full min-h-screen m-0 p-0 overflow-hidden pt-16"> {/* pt-16 accounts for fixed header */}
+      <section id="about" className="relative w-full min-h-screen m-0 p-0 overflow-hidden pt-16">
       {/* Background image */}
       <img
         src={bgImage}
