@@ -96,14 +96,15 @@ useEffect(() => {
       >
         {/* Sidebar header with logo and close button */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <a
-            href="#"
-            className="text-2xl font-medium"
-            style={{ fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em' }}
-            onClick={() => setSidebarOpen(false)}
-          >
-            FinLog
-          </a>
+<a
+  href="#top"
+  className="text-2xl font-medium"
+  style={{ fontFamily: "'Orbitron', sans-serif", letterSpacing: '0.05em' }}
+  onClick={() => setSidebarOpen(false)}
+>
+  FinLog
+</a>
+
           <button
             onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
